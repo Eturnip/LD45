@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Scenes/Tile.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Scenes/TileState.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Tile.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scripts/TileState.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -85,24 +85,29 @@ shader = SubResource( 7 )
 [sub_resource type="Animation" id=9]
 resource_name = "Flip"
 length = 0.6
-tracks/0/type = "transform"
-tracks/0/path = NodePath(".")
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray(  )
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 2, 0.5 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 180, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( -180, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
 [node name="Tile" type="Spatial"]
@@ -115,21 +120,23 @@ input_capture_on_drag = true
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="Unflipped" type="MeshInstance" parent="StaticBody"]
+[node name="TileState" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Flipper" type="Spatial" parent="."]
+
+[node name="Unflipped" type="MeshInstance" parent="Flipper"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0, 0 )
 material_override = SubResource( 4 )
 cast_shadow = 0
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Flipped" type="MeshInstance" parent="StaticBody"]
+[node name="Flipped" type="MeshInstance" parent="Flipper"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, -0.01, 0 )
 cast_shadow = 0
 mesh = SubResource( 5 )
 material/0 = SubResource( 8 )
-
-[node name="TileState" type="Node" parent="."]
-script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Flip = SubResource( 9 )
