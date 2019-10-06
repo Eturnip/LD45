@@ -118,11 +118,13 @@ shape = SubResource( 1 )
 [node name="Unflipped" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0, 0 )
 material_override = SubResource( 4 )
+cast_shadow = 0
 mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Flipped" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, -0.01, 0 )
+cast_shadow = 0
 mesh = SubResource( 5 )
 material/0 = SubResource( 8 )
 
