@@ -23,7 +23,7 @@ func createTileGrid():
 			vec3.z = gridPosz
 			var tileInstance=tileScene.instance()
 			tileInstance.translate(vec3)
-			print("created instance")
+			tileInstance.tilePositionz = vec3.z
 			self.add_child(tileInstance)
 			gridPosz+=1
 		gridPosx+=1

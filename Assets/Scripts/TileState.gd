@@ -4,12 +4,15 @@ extends Node
 # var a = 2
 # var b = "text"
 var mouseover : bool
+var location : int
 signal flip
 signal zLocation
+#var positionz = get_parent().tilePositionz
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	
 	pass # Replace with function body.
 
@@ -20,15 +23,16 @@ func _ready():
 
 func _on_StaticBody_mouse_entered():
 	mouseover=true
-	print("mouse over")
+	#print("mouse over")
 
 func _on_StaticBody_mouse_exited():
 	mouseover=false
-	print("mouse out")
+	#print("mouse out")
 	
 func _input(event):
 	if mouseover == true:
 		if event.is_action_pressed("click") :
 			emit_signal("flip")
-			emit_signal("zLocation")
+			print(get_parent().tilePositionz)
+			#emit_signal("zLocation",location)
 

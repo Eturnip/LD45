@@ -85,29 +85,32 @@ shader = SubResource( 7 )
 [sub_resource type="Animation" id=9]
 resource_name = "Flip"
 length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Flipper")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 2, 0.5 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( -180, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:translation")
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Flipper:rotation_degrees:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ), Vector3( 0, 0, 0 ) ]
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -90, 0, 39.6, 0, -39.6, -180, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Flipper:translation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6 )
 }
 
 [node name="Tile" type="Spatial"]
@@ -143,3 +146,4 @@ anims/Flip = SubResource( 9 )
 [connection signal="mouse_entered" from="StaticBody" to="TileState" method="_on_StaticBody_mouse_entered"]
 [connection signal="mouse_exited" from="StaticBody" to="TileState" method="_on_StaticBody_mouse_exited"]
 [connection signal="flip" from="TileState" to="." method="_on_TileState_flip"]
+[connection signal="zLocation" from="TileState" to="." method="_on_TileState_zLocation" binds= [ 0 ]]
