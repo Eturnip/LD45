@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Scripts/TileInstancer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/cameraRig.gd" type="Script" id=2]
@@ -7,6 +7,12 @@
 [sub_resource type="Environment" id=1]
 background_mode = 1
 background_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
 
 [node name="Main" type="Node"]
 
@@ -29,3 +35,4 @@ script = ExtResource( 3 )
 [node name="Target" type="Spatial" parent="."]
 
 [node name="Path" type="Path" parent="."]
+curve = SubResource( 2 )
