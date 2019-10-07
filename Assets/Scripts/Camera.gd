@@ -8,8 +8,8 @@ var zDist=0
 var zMax=0
 var zMin=0
 var vec3 : Vector3
-onready var target = $"../../Target".translation
-#var rig = get_parent()
+onready var target :Vector3 = $"../../Target".translation
+onready var rig = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +29,8 @@ func _input(event):
 		zDist=zMax-zMin
 		print("zDist",zDist)
 		vec3.y=zDist
-		movetarget()
+		target = vec3
+		#movetarget()
 		zMax = 0
 		zMin = 0
 
@@ -38,9 +39,9 @@ func movetarget():
 	#vec3 = pos - vec3
 	target = vec3
 	print(target)
-	get_parent().transform.origin = vec3
+	#get_parent().transform.origin = vec3
 	
 
-#func _process(delta):
-	
+func _process(delta):
+	rig.translation = rig.translation.linear_interpolate((target),delta)
 #	zDist = zMax - zMin

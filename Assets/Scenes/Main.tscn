@@ -27,3 +27,5 @@ script = ExtResource( 3 )
 [node name="Tween" type="Tween" parent="cameraRig"]
 
 [node name="Target" type="Spatial" parent="."]
+
+[node name="Path" type="Path" parent="."]
